@@ -1,0 +1,25 @@
+.card { background: #c6d2cd; border:1px solid #afb0c5; border-radius:.75rem; padding:1rem; }
+.header-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.card-title { margin:0; font-size:1.25rem; }
+.btn { padding:.45rem .75rem; border-radius:.5rem; border:1px solid #c6d2cd; background: #c1e1c4; }
+.btn:hover { background: #ffffff; }
+.muted { color:#667085; }
+.error { color:#b42318; margin-top:.5rem; }
+
+.table-wrap { overflow:auto; margin-top:.75rem; }
+table { width:100%; border-collapse: collapse; }
+thead th {
+  text-align:left; font-weight:600; font-size:.95rem; padding:.6rem .5rem; background: #c1e1c4; border-bottom:1px solid #e5e7eb;
+}
+tbody td { padding:.6rem .5rem; border-bottom:1px solid #c6d2cd; }
+.actions-cell { text-align:right; }
+
+.skeleton { margin-top:.75rem; }
+.skeleton .bar {
+  height: 12px; background: linear-gradient(90deg,#f2f4f7 25%,#e5e7eb 37%,#f2f4f7 63%);
+  animation: shimmer 1.2s infinite; border-radius:.25rem; margin:.5rem 0;
+}
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}

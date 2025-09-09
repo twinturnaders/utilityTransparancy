@@ -1,0 +1,95 @@
+<section class="admin-shell">
+  <h1>Pending Crowd Submissions</h1>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="list" *ngIf="!loading">
+    <table *ngIf="items.length; else empty">
+      <thead>
+      <tr>
+        <th>Town</th>
+        <th>Type</th>
+        <th>Base Rate</th>
+        <th>Submitted</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of items">
+        <td>{{ s.townName }}</td>
+        <td>{{ s.rateType }}</td>
+        <td>{{ s.baseRate | currency }}</td>
+        <td>{{ s.createdAt | date:'MMM d, y h:mm a' }}</td>
+        <td><button class="btn" (click)="inspect(s)">Review</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #empty><p class="muted">No pending submissions.</p></ng-template>
+  </div>
+
+  <!-- Side panel / modal style review -->
+  <div class="drawer" *ngIf="selected">
+    <header class="drawer-head">
+      <h2>Review: {{ selected.townName }} ({{ selected.rateType }})</h2>
+      <button class="btn" (click)="selected=null">Close</button>
+    </header>
+
+    <div class="grid">
+      <div>
+        <h3>Tiers</h3>
+        <table class="tight" *ngIf="selected.rateTiers?.length">
+          <thead><tr><th>Up to</th><th>Rate</th></tr></thead>
+          <tbody>
+          <tr *ngFor="let r of selected.rateTiers">
+            <td>{{ r.upTo ?? '∞' }}</td>
+            <td>{{ r.rate | currency }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <p class="muted" *ngIf="!selected.rateTiers?.length">No tiers</p>
+      </div>
+
+      <div>
+        <h3>Fees</h3>
+        <table class="tight" *ngIf="selected.fees?.length">
+          <thead><tr><th>Name</th><th>Amount</th></tr></thead>
+          <tbody>
+          <tr *ngFor="let f of selected.fees">
+            <td>{{ f.name }}</td>
+            <td>{{ f.amount | currency }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <p class="muted" *ngIf="!selected.fees?.length">No fees</p>
+      </div>
+    </div>
+
+    <div class="notes">
+      <h3>Notes</h3>
+      <pre>{{ selected.notes || '—' }}</pre>
+    </div>
+
+    <div class="resolution">
+      <label>Map to Municipality</label>
+      <div class="row">
+        <input type="text" [(ngModel)]="muniQuery" (input)="searchMunicipality()" placeholder="Search…" />
+        <button class="btn" (click)="searchMunicipality()">Search</button>
+      </div>
+      <ul class="suggestions" *ngIf="muniSuggestions.length">
+        <li *ngFor="let m of muniSuggestions" (click)="chooseMunicipality(m)">
+          <strong>{{ m.name }}</strong> <span class="muted">({{ m.state }})</span>
+          <small class="muted block">{{ m.county }}</small>
+        </li>
+      </ul>
+
+      <p class="muted" *ngIf="chosenMunicipality">
+        Selected: <strong>{{ chosenMunicipality.name }}</strong> ({{ chosenMunicipality.state }})
+      </p>
+
+      <div class="actions">
+        <button class="btn danger" (click)="reject(prompt('Reason for rejection?') || '')">Reject</button>
+        <button class="btn primary" [disabled]="!chosenMunicipality" (click)="approve()">Approve & Map</button>
+      </div>
+    </div>
+  </div>
+</section>

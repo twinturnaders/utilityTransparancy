@@ -1,0 +1,15 @@
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  line-height: 1;
+  user-select: none;
+
+}
+.star {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+.star.filled {
+  color: #012aa7;
+  accent-color: black !important;
+}

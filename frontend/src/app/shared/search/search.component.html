@@ -1,0 +1,68 @@
+<app-home-button></app-home-button>
+<div class="search-container">
+  <form class="search-form" (ngSubmit)="onSearch()" [formGroup]="searchForm" aria-label="Municipality search form">
+    <div class="field">
+      <label for="zip">ZIP Code</label>
+      <input id="zip" formControlName="zip" type="text" inputmode="numeric" maxlength="5" placeholder="59801" />
+      <div class="hint">Enter a 5-digit ZIP.</div>
+      <div class="error" *ngIf="zipCtrl?.touched && zipCtrl?.invalid">Valid 5-digit ZIP required.</div>
+    </div>
+
+
+    <div class="field">
+      <label for="radius">Radius</label>
+      <select id="radius" formControlName="radius">
+        <option *ngFor="let r of radiusOptions" [value]="r">{{ r }} miles</option>
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label for="gallonsUsed">Gallons of Water Used</label>
+      <input id="gallonsUsed" formControlName="gallonsUsed" type="text" inputmode="numeric" maxlength="7" placeholder="5000" />
+      <div class="hint">Enter Water Usage Amount</div>
+    </div>
+
+
+    <button class="cta-button" type="submit" [disabled]="searchForm.invalid || loading">
+      {{ loading ? 'Searching…' : 'Search' }}
+    </button>
+  </form>
+
+
+  <div *ngIf="error" class="error-banner">{{ error }}</div>
+  <div class="results">
+    <div *ngIf="!results.length && !loading && !error" class="muted">
+      No results yet. Try a search.
+    </div>
+
+    <table *ngIf="results.length">
+
+
+      <thead>
+      <tr>
+        <th>Municipality</th>
+        <th>Est. Water</th>
+        <th>Est. Sewer</th>
+        <th>Est. Total</th>
+        <th>Confidence</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let m of results; trackBy: trackById">
+        <td>{{ m.name }}</td>
+        <td>{{ m.estimatedWaterCharge !== null && m.estimatedWaterCharge !== undefined ? (m.estimatedWaterCharge | currency) : '—' }}</td>
+        <td>{{ m.estimatedSewerCharge !== null && m.estimatedSewerCharge !== undefined ? (m.estimatedSewerCharge | currency) : '—' }}</td>
+        <td>{{ m.estTotal !== null && m.estTotal !== undefined ? (m.estTotal | currency) : '—' }}</td>
+        <td>
+
+        <app-star-rating [value]="m.confidenceRating ?? 0"></app-star-rating>
+
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="home-container">
+  <section class="hero">
+    <h1>Welcome to Utility Transparency</h1>
+    <p class="tagline">Bringing clarity to Montana's municipal water and sewer rates.</p>
+  </section>
+
+  <section class="problem">
+    <h2>Why This Matters</h2>
+    <p>Across Montana, water and sewer rates vary dramatically from town to town—with little transparency or public access to rate structures. Many residents pay high bills without knowing how those costs compare to neighboring communities, or how they’re calculated.</p>
+  </section>
+
+  <section class="crowdsourcing">
+    <h2>How We Get the Data</h2>
+    <p>This platform is <strong>crowdsourced</strong>. That means we rely on residents like you to submit bills, rate sheets, or ordinance data from your town. It’s the only way we can gather accurate, up-to-date information across all municipalities.</p>
+    <p>Together, we can build a better picture of fairness, cost, and access.</p>
+  </section>
+
+  <section class="confidence">
+    <h2>Understanding the Confidence Rating</h2>
+    <p>Each municipality is given a <strong>confidence rating</strong> from 1 to 5 stars:</p>
+    <ul class="star-explanation">
+      <li><strong class = "star">★</strong>– Based on state-level (DNRC) or outdated data</li>
+      <li><strong class = "star">★★</strong>  – Inferred or partial public info</li>
+      <li><strong class = "star">★★★</strong>  – One user-submitted bill</li>
+      <li><strong class = "star">★★★★</strong> – Two or more consistent submissions</li>
+      <li><strong class = "star">★★★★★</strong> – Verified by admin with ordinance or full review</li>
+    </ul>
+  </section>
+
+  <section class="cta">
+    <button routerLink="/compare" class="cta-button">Compare Rates</button>
+    <router-outlet></router-outlet>
+    <button routerLink="/crowdsource_form" class="cta-button">Submit A Town Water/Sewer Rate</button>
+  </section>
+  <section class="accounts">
+    <h2>Track Your Bills Over Time</h2>
+    <p>
+      Create a free account to securely save your water and sewer bills.
+      Your personal dashboard lets you track changes in your costs,
+      compare against neighboring towns, and build a history of your household utility expenses.
+    </p>
+    <p>
+      By saving bills, you also contribute to our crowdsourced database, helping neighbors
+      across Montana gain better insight into their rates.
+    </p>
+
+  </section>
+ <section class="cta"> <button routerLink="/go/login" class="cta-button">Login/Account Home</button> </section>
+  <section class="cta"> <button routerLink="/register" class="cta-button">Register For Account</button> </section>
+</div>
+

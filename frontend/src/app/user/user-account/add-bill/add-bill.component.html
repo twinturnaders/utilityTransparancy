@@ -1,0 +1,112 @@
+<section class="shell card">
+  <header class="header-row">
+    <h2>Add Bill</h2>
+    <a routerLink="/user-account/bills" class="btn">Back to Bills</a>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+    <div class="grid two">
+      <div class="field">
+        <label for="billDate">Bill date</label>
+        <input id="billDate" type="date" formControlName="billDate" />
+      </div>
+
+      <div class="field">
+        <label for="dueDate">Due date</label>
+        <input id="dueDate" type="date" formControlName="dueDate" />
+      </div>
+
+      <div class="field">
+        <label for="paidDate">Paid date</label>
+        <input id="paidDate" type="date" formControlName="paidDate" />
+      </div>
+
+      <div class="field checkbox">
+        <label>
+          <input type="checkbox" formControlName="paid" />
+          Mark as paid
+        </label>
+      </div>
+    </div>
+
+    <h3>Usage</h3>
+    <div class="grid two">
+      <div class="field">
+        <label for="waterUsage">Water usage (kgal)</label>
+        <input id="waterUsage" type="number" step="0.01" min="0" formControlName="waterUsage" />
+        <small class="error" *ngIf="form.get('waterUsage')?.touched && form.get('waterUsage')?.invalid">
+          Must be ≥ 0
+        </small>
+      </div>
+
+      <div class="field">
+        <label for="sewerUsage">Sewer usage (kgal)</label>
+        <input id="sewerUsage" type="number" step="0.01" min="0" formControlName="sewerUsage" />
+        <small class="error" *ngIf="form.get('sewerUsage')?.touched && form.get('sewerUsage')?.invalid">
+          Must be ≥ 0
+        </small>
+      </div>
+    </div>
+
+    <h3>Charges</h3>
+    <div class="grid two">
+      <div class="field">
+        <label for="waterCharge">Water charge</label>
+        <input id="waterCharge" type="number" step="0.01" min="0" formControlName="waterCharge" />
+        <small class="error" *ngIf="form.get('waterCharge')?.touched && form.get('waterCharge')?.invalid">
+          Must be ≥ 0
+        </small>
+      </div>
+
+      <div class="field">
+        <label for="sewerCharge">Sewer charge</label>
+        <input id="sewerCharge" type="number" step="0.01" min="0" formControlName="sewerCharge" />
+        <small class="error" *ngIf="form.get('sewerCharge')?.touched && form.get('sewerCharge')?.invalid">
+          Must be ≥ 0
+        </small>
+      </div>
+    </div>
+
+    <h3>Fees</h3>
+    <div class="tiers">
+      <div class="tiers-head">
+        <button class="btn" type="button" (click)="addFee()">Add fee</button>
+      </div>
+
+      <div class="tier-row" *ngFor="let f of feesArray.controls; let i = index" [formGroup]="f">
+        <div class="field">
+          <label>Fee name</label>
+          <input type="text" formControlName="name" placeholder="e.g., Late fee, Admin fee" />
+          <small class="error" *ngIf="f.get('name')?.touched && f.get('name')?.invalid">
+            Name is required
+          </small>
+        </div>
+        <div class="field">
+          <label>Amount</label>
+          <input type="number" step="0.01" min="0" formControlName="amount" />
+          <small class="error" *ngIf="f.get('amount')?.touched && f.get('amount')?.invalid">
+            Amount ≥ 0 required
+          </small>
+        </div>
+        <div class="row-actions">
+          <button class="btn danger" type="button" (click)="removeFee(i)">Remove</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="messages">
+      <p class="success" *ngIf="success">{{ success }}</p>
+      <p class="error" *ngIf="error">{{ error }}</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" type="submit" [disabled]="submitting || form.invalid">
+        <span *ngIf="!submitting">Save bill</span>
+        <span *ngIf="submitting">Saving…</span>
+      </button>
+      <a routerLink="/user/bills" class="btn">Cancel</a>
+    </div>
+  </form>
+</section>

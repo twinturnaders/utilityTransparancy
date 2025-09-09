@@ -1,0 +1,11 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/capstone}
+    username: ${SPRING_DATASOURCE_USERNAME:capuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:cappass}
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:validate}

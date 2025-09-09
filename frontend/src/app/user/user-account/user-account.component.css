@@ -1,0 +1,11 @@
+.account-shell { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+.account-header h1 { margin: 0 0 .25rem; font-size: 1.875rem; }
+.muted { color: #667085; }
+
+.tabs { display: flex; gap: .5rem; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+.tab-link {
+  display: inline-block; padding: .5rem .75rem; border-radius: .5rem;
+  background: #c6d2cd; color: #1b1e1b; text-decoration: none; border: 1px solid #c6d2cd;
+}
+.tab-link:hover { background: #ffffff; }
+.tab-link.active { background: #1b1e1b; color: #c6d2cd; border-color: #1b1e1b; }

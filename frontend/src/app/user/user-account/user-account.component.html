@@ -1,0 +1,28 @@
+<section class="account-shell">
+  <header class="account-header">
+    <h1>Your Account</h1>
+    <p class="muted">Manage your profile, bills, and submissions.</p>
+  </header>
+
+  <nav class="tabs">
+
+
+
+    <a
+      routerLink="/user-account"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="tab-link"
+    >Profile</a
+    >
+    <a routerLink="/user-account/bills" routerLinkActive="active" class="tab-link">Bills</a>
+    <a routerLink="/user-account/crowdsource" routerLinkActive="active" class="tab-link">Submit Rates</a>
+    <a routerLink="/user-account/compare" class="tab-link">Compare</a>
+    <a routerLink="/user-account/about" routerLinkActive="active" class="tab-link">About</a>
+    <a routerLink="/user-account/logout" routerLinkActive="active" class="tab-link">Logout</a>
+  </nav>
+
+<router-outlet/>
+
+</section>
+

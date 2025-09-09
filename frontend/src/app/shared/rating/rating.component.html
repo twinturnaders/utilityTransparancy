@@ -1,0 +1,5 @@
+<span class="stars" aria-label="confidence rating">
+  <ng-container *ngFor="let s of stars">
+    <span class="star" [ngClass]="{ filled: s <= value }">★</span>
+  </ng-container>
+</span>
